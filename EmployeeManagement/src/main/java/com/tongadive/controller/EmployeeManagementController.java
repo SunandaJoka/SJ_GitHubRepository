@@ -18,7 +18,7 @@ import com.tongadive.entity.Employee;
 import com.tongadive.service.EmployeeManagementService;
 
 @RestController
-@RequestMapping("api/employeeManagement")
+@RequestMapping("api/employee-management")
 public class EmployeeManagementController {
 	
 	@Autowired
@@ -30,37 +30,41 @@ public class EmployeeManagementController {
 	}
 	
 	//Build Add Company REST API
-	//http://localhost:8080/api/employeeManagement/addCompany
-	@PostMapping("/addCompany")
+	//http://localhost:8080/api/employee-management/add-company
+	
+	@PostMapping("/add-company")
 	public ResponseEntity<Company> addCompany(@RequestBody Company company) {
 		Company savedCompany = employeeManagementService.addCompany(company);		
 		return new ResponseEntity<>(savedCompany, HttpStatus.CREATED);		
 	}
 	
 	//Build Add Employee REST API
-	//http://localhost:8080/api/employeeManagement/addEmployee
-	@PostMapping("/addEmployee")
+	//http://localhost:8080/api/employee-management/add-employee
+	
+	/**@PostMapping("/add-employee")
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
 		Employee savedEmployee = employeeManagementService.addEmployee(employee);
 		return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
 	}
 	
 	//Build Get All Companies REST API
-	//http://localhost:8080/api/employeeManagement/allCompanies
-	@GetMapping("/allCompanies")
+	//http://localhost:8080/api/employeeManagement/all-companies
+	
+	@GetMapping("/all-companies")
 	public ResponseEntity<List<Company>> getAllCompanies(){
 		List<Company> companiesList = employeeManagementService.getAllCompanies();
 		return new ResponseEntity<>(companiesList, HttpStatus.OK);		
 	}
 	
 	//Build Get All Employees By Company Name REST API
-	//http://localhost:8080/api/employeeManagement/allEmployees/{companyName}
-	@GetMapping("allEmployees/{companyName}")
-	public ResponseEntity<List<Employee>> getEmployeesByCompany(@PathVariable("companyName") String companyName){
+	//http://localhost:8080/api/employeeManagement/all-employees/{companyName}
+	
+	@GetMapping("all-employees/{companyName}")
+	public ResponseEntity<List<Employee>> getEmployeesByCompany(@PathVariable("companyName") String companyName) {
 		List<Employee> employeesByCompany = employeeManagementService.getAllEmployeesByCompany(companyName);		
 		return new ResponseEntity<>(employeesByCompany, HttpStatus.OK);
 		
-	}
+	}**/
 	
 	
 	

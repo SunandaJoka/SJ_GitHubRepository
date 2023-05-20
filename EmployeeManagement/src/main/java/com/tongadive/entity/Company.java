@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "company")
@@ -18,18 +19,22 @@ public class Company {
 	@Column(name = "company_id")
 	private int companyId;
 
-	@Column(name = "company_name",nullable = false)
+	@Column(name = "company_name")	
+	@NotBlank(message = "Company Name is required")
 	private String companyName;
 	
+	//NoArguments Constructor
 	public Company() {		
-	}	
+	}
 
+	//AllArguments Constructor
 	public Company(int companyId, String companyName) {
 		super();
 		this.companyId = companyId;
 		this.companyName = companyName;
 	}
 
+	//Getter and Setter Methods	
 	public int getCompanyId() {
 		return companyId;
 	}
@@ -62,6 +67,5 @@ public class Company {
 		Company other = (Company) obj;
 		return companyId == other.companyId && Objects.equals(companyName, other.companyName);
 	}
-	
-	
+
 }

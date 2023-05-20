@@ -2,15 +2,17 @@ package com.tongadive.entity;
 
 import java.util.Date;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -22,38 +24,49 @@ public class Employee {
 	@Column(name = "employee_id")
 	private int employeeId;
 	
-	@Column(name = "first_name",nullable = false)
+	@Column(name = "first_name")
+	@NotBlank(message = "First Name is required")
 	private String firstName;
 	
-	@Column(name = "last_name",nullable = false)
+	@Column(name = "last_name")
+	@NotBlank(message = "Last Name is required")
 	private String lastName;
 	
-	@Column(name = "gender",nullable = false)
+	@Column(name = "gender")
+	@NotBlank(message = "Gender is required")
 	private char gender;
 	
-	@Column(name = "age",nullable = false)
+	@Column(name = "age")
+	@NotBlank(message = "Age is required")
 	private int age;
 
-	@Column(name = "email",nullable = false,unique = true)
+	@Column(name = "email",unique = true)
+	@Email(message= "Email should be valid")
 	private String email;
 	
-	@ManyToOne
-	@JoinColumn(name = "company_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "company_id", referencedColumnName = "company_id")
+	@NotBlank(message = "Company ID is required")
 	private Company company;
 	
-	@ManyToOne
-	@JoinColumn(name = "department_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "department_id", referencedColumnName = "department_id")
+	@NotBlank(message = "Department ID is required")
 	private Department department;
 	
-	@Column(name = "salary",nullable = false)
+	@Column(name = "salary")
+	@NotBlank(message = "Salary is required")
 	private double salary;
 	
-	@Column(name = "hire_date",nullable = false)
+	@Column(name = "hire_date")
+	@NotBlank(message = "Hired date is required")
 	private Date hireDate;
 
+	//NoArguments Constructor
 	public Employee() {		
 	}
 
+	//AllArguments Constructor
 	public Employee(int employeeId, String firstName, String lastName, char gender, int age, String email,
 			Company company, Department department, double salary, Date hireDate) {
 		super();
@@ -69,6 +82,8 @@ public class Employee {
 		this.hireDate = hireDate;
 	}
 
+	//Getter and Setter Methods
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}

@@ -11,6 +11,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "department")
@@ -23,22 +24,23 @@ public class Department implements Serializable {
 	@Column(name = "department_id")
 	private int departmentId;
 	
-	@Column(name = "department_name", nullable = false)
+	@Column(name = "department_name")
+	@NotBlank(message = "Department Name is required")
 	private String departmentName;
 	
 	@Id
 	@OneToOne(optional = false, orphanRemoval = true )
-	@JoinColumn(name = "company_id", nullable = false)
-	private Company company;
+	@JoinColumn(name = "company_id", referencedColumnName = "company_id")
+	private int companyId;
 
 	public Department() {		
 	}
 
-	public Department(int departmentId, String departmentName, Company company) {
+	public Department(int departmentId, String departmentName, int companyId) {
 		super();
 		this.departmentId = departmentId;
 		this.departmentName = departmentName;
-		this.company = company;
+		this.companyId = companyId;
 	}
 
 	public int getDepartmentId() {
@@ -57,12 +59,12 @@ public class Department implements Serializable {
 		this.departmentName = departmentName;
 	}
 
-	public Company getCompany() {
-		return company;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}		
 
 }

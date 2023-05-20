@@ -8,20 +8,37 @@ public class CompositeKey implements Serializable {
 	private static final long serialVersionUID = -909206262878526790L;
 	
 	private int departmentId;
-	private Company company;
+	private int companyId;
 	
 	public CompositeKey() {		
 	}
 	
-	public CompositeKey(int departmentId, Company company) {
+	public CompositeKey(int departmentId, int companyId) {
 		super();
 		this.departmentId = departmentId;
-		this.company = company;
+		this.companyId = companyId;
+	}
+
+
+	public int getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public int getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(company, departmentId);
+		return Objects.hash(companyId, departmentId);
 	}
 
 	@Override
@@ -33,23 +50,7 @@ public class CompositeKey implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CompositeKey other = (CompositeKey) obj;
-		return Objects.equals(company, other.company) && departmentId == other.departmentId;
-	}
-
-	public int getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
+		return companyId == other.companyId && departmentId == other.departmentId;
 	}
 
 }

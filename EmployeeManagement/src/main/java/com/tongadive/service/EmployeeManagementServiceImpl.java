@@ -1,6 +1,5 @@
 package com.tongadive.service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,8 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService{
 
 	@Override
 	public List<Company> getAllCompanies() {
-		return companyRepository.findAll();
+		List<Company> companiesList=companyRepository.findAll();
+		return companiesList;
 	}
 
 	@Override
